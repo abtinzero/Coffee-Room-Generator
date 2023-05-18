@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdex35nf2tekd"]
+
+[ext_resource type="PackedScene" uid="uid://bmfo2ahewj54b" path="res://scenes/character.tscn" id="1_5jrps"]
+[ext_resource type="PackedScene" uid="uid://bqowhtgep5v0r" path="res://scenes/level.tscn" id="1_6qery"]
+
+[sub_resource type="Environment" id="Environment_3bi77"]
+background_color = Color(0.737255, 0.737255, 0.737255, 1)
+background_energy_multiplier = 2.39
+ambient_light_color = Color(0.960784, 0.964706, 0.972549, 1)
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3bi77")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.765034, 0.64399, 0, -0.64399, 0.765034, 0, 11.4756, 16.782)
+
+[node name="Level" parent="." instance=ExtResource("1_6qery")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.211651, -0.498223, 0.229568)
+
+[node name="Buca" parent="." instance=ExtResource("1_5jrps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+
+[node name="Laolo" parent="." instance=ExtResource("1_5jrps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55567, 1, 0)
