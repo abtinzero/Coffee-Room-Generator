@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqowhtgep5v0r"]
+[gd_scene load_steps=5 format=3 uid="uid://bqowhtgep5v0r"]
+
+[ext_resource type="PackedScene" uid="uid://yhaf8c5vlekf" path="res://models/structure/AreaRelax.glb" id="1_afvn4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m87o7"]
 albedo_color = Color(0.12549, 1, 1, 1)
@@ -18,3 +20,5 @@ mesh = SubResource("PlaneMesh_mft3f")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_2tho5")
+
+[node name="AreaRelax" parent="." instance=ExtResource("1_afvn4")]

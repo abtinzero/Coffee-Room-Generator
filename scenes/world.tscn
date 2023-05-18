@@ -1,12 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdex35nf2tekd"]
+[gd_scene load_steps=13 format=3 uid="uid://ddsp8trgbct4v"]
 
 [ext_resource type="PackedScene" uid="uid://bmfo2ahewj54b" path="res://scenes/character.tscn" id="1_5jrps"]
 [ext_resource type="PackedScene" uid="uid://bqowhtgep5v0r" path="res://scenes/level.tscn" id="1_6qery"]
+[ext_resource type="Shader" path="res://scenes/world.gdshader" id="1_62fjh"]
+[ext_resource type="Shader" path="res://scenes/world2.gdshader" id="2_e8y0m"]
+[ext_resource type="PackedScene" uid="uid://yfve73sws6wa" path="res://scenes/baolo.tscn" id="4_ihygh"]
+[ext_resource type="PackedScene" uid="uid://cbx48pf4m7wkj" path="res://scenes/buca.tscn" id="4_paq8y"]
 
 [sub_resource type="Environment" id="Environment_3bi77"]
 background_color = Color(0.737255, 0.737255, 0.737255, 1)
 background_energy_multiplier = 2.39
 ambient_light_color = Color(0.960784, 0.964706, 0.972549, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1hbvi"]
+shader = ExtResource("1_62fjh")
+shader_parameter/scanline_count = 50.0
+
+[sub_resource type="Sky" id="Sky_xhetg"]
+sky_material = SubResource("ShaderMaterial_1hbvi")
+
+[sub_resource type="Environment" id="Environment_844s5"]
+sky = SubResource("Sky_xhetg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ichxo"]
+shader = ExtResource("1_62fjh")
+shader_parameter/scanline_count = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ueinr"]
+shader = ExtResource("2_e8y0m")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.2
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 4.0
+shader_parameter/roll_size = 1.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 3.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.02
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.4
 
 [node name="World" type="Node3D"]
 
@@ -14,13 +56,54 @@ ambient_light_color = Color(0.960784, 0.964706, 0.972549, 1)
 environment = SubResource("Environment_3bi77")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.765034, 0.64399, 0, -0.64399, 0.765034, 0, 11.4756, 16.782)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17, 7, 0)
+environment = SubResource("Environment_844s5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_ichxo")
+offset_right = 1148.0
+offset_bottom = 646.0
+
+[node name="ColorRect2" type="ColorRect" parent="Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_ueinr")
+offset_right = 1148.0
+offset_bottom = 646.0
 
 [node name="Level" parent="." instance=ExtResource("1_6qery")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.211651, -0.498223, 0.229568)
 
-[node name="Buca" parent="." instance=ExtResource("1_5jrps")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+[node name="SpotLight3D" type="SpotLight3D" parent="Level"]
+transform = Transform3D(6.78958e-10, -0.999879, -0.0155327, -4.37061e-08, -0.0155327, 0.999879, -1, 5.55112e-17, -4.37114e-08, 9.6035, 10.9715, -0.229568)
+light_energy = 10.0
+spot_range = 20.2465
+spot_angle = 68.9063
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Level"]
+transform = Transform3D(6.78958e-10, -0.999879, -0.0155327, -4.37061e-08, -0.0155327, 0.999879, -1, 5.55112e-17, -4.37114e-08, -12.9794, 10.9715, -0.229568)
+light_energy = 10.0
+spot_range = 20.2465
+spot_angle = 68.9063
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Level"]
+transform = Transform3D(6.78958e-10, -0.999879, -0.0155327, -4.37061e-08, -0.0155327, 0.999879, -1, 5.55112e-17, -4.37114e-08, 0.588505, 10.9715, -3.31268)
+light_energy = 10.0
+spot_range = 20.2465
+spot_angle = 68.9063
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Level"]
+transform = Transform3D(6.78958e-10, -0.999879, -0.0155327, -4.37061e-08, -0.0155327, 0.999879, -1, 5.55112e-17, -4.37114e-08, 0.588505, 10.9715, 2.3444)
+light_energy = 10.0
+spot_range = 20.2465
+spot_angle = 68.9063
 
 [node name="Laolo" parent="." instance=ExtResource("1_5jrps")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55567, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.502, 0, 0.199)
+
+[node name="Baolo" parent="Laolo" instance=ExtResource("4_ihygh")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, 0, 0)
+
+[node name="Buca" parent="Laolo" instance=ExtResource("4_paq8y")]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 4.37989, 0, 2.23957)
